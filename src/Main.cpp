@@ -22,7 +22,7 @@ json decode_bencoded_value(const std::string& encoded_value) {
             throw std::runtime_error("Invalid encoded value: " + encoded_value);
         }
     } else if (encoded_value[0]=='i') {
-        std::string number_string = encoded_value.substr(1, encoded_value.length()-1);
+        std::string number_string = encoded_value.substr(1, encoded_value.find('e'));
         int number = stoi(number_string);
         return json(number);
     }
