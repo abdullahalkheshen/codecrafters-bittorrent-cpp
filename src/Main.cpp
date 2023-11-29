@@ -25,7 +25,7 @@ json decode_bencoded_value(const std::string& encoded_value) {
         throw std::runtime_error("Unhandled encoded value: " + encoded_value);
     }
     
-    if(encoded_value[0]=='i' && encoded_value[encoded_value.length()-1] == 'e') {
+    if(encoded_value[0]=='i') {
         std::string number_string = encoded_value.substr(1, encoded_value.length()-1);
         int number = stoi(number_string);
         return json(number);
