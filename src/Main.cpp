@@ -9,6 +9,7 @@
 using json = nlohmann::json;
 
 json decode_bencoded_value(const std::string& encoded_value) {
+    
     if (std::isdigit(encoded_value[0])) {
         // Example: "5:hello" -> "hello"
         size_t colon_index = encoded_value.find(':');
@@ -21,6 +22,15 @@ json decode_bencoded_value(const std::string& encoded_value) {
             throw std::runtime_error("Invalid encoded value: " + encoded_value);
         }
     } else {
+        throw std::runtime_error("Unhandled encoded value: " + encoded_value);
+    }
+    
+    if(encoded_value[0]=='i' && encoded_value[encoded_value.length()-1] == 'e') {
+        std::string number_string = encoded_value.substr(1, encoded_value.length()-1);
+        int number = stoi(number_string);
+        return json(number);
+    }
+    else {
         throw std::runtime_error("Unhandled encoded value: " + encoded_value);
     }
 }
